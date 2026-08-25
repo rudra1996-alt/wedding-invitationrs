@@ -1,0 +1,1147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+
+  <!-- Mobile Responsive -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- SEO -->
+  <title>Our Wedding | Rudra & Samikshya</title>
+  <meta
+    name="description"
+    content="Join us as we celebrate our wedding. We can't wait to celebrate this beautiful day with you."
+  />
+
+  <!-- Open Graph / WhatsApp Preview -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Rudra & Samikshya | We're Getting Married!" />
+  <meta
+    property="og:description"
+    content="Join us as we celebrate our special day together."
+  />
+  <meta property="og:url" content="https://yourdomain.com/" />
+  <meta
+    property="og:image"
+    content="https://yourdomain.com/images/couple-caricature.png"
+  />
+  <meta property="og:image:alt" content="Wedding couple caricature" />
+  <meta property="og:site_name" content="Rudra & Samikshya Wedding" />
+
+  <!-- WhatsApp / Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Rudra & Samikshya | Wedding" />
+  <meta
+    name="twitter:description"
+    content="Join us for our special day."
+  />
+  <meta
+    name="twitter:image"
+    content="https://yourdomain.com/images/couple-caricature.png"
+  />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ivory: "#FAF7F2",
+            emerald: "#064E3B",
+            emeraldDark: "#022C22",
+            gold: "#B08D57",
+            goldLight: "#D4AF6A"
+          },
+          fontFamily: {
+            serif: ["Georgia", "serif"],
+            sans: ["Inter", "Arial", "sans-serif"]
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: #faf7f2;
+    }
+
+    body.locked {
+      overflow: hidden;
+      height: 100vh;
+    }
+
+    .gold-text {
+      background: linear-gradient(
+        90deg,
+        #9a753d,
+        #d4af6a,
+        #9a753d
+      );
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-pattern {
+      background-image:
+        radial-gradient(
+          circle at 20% 20%,
+          rgba(176, 141, 87, 0.10) 0,
+          transparent 25%
+        ),
+        radial-gradient(
+          circle at 80% 70%,
+          rgba(6, 78, 59, 0.08) 0,
+          transparent 25%
+        );
+    }
+
+    .gold-border {
+      border-color: rgba(176, 141, 87, 0.45);
+    }
+
+    .event-card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .event-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px rgba(6, 78, 59, 0.12);
+    }
+
+    .countdown-box {
+      backdrop-filter: blur(8px);
+      background: rgba(255, 255, 255, 0.65);
+    }
+
+    /* ================= SEAL / ENVELOPE INTRO ================= */
+
+    #envelopeOverlay {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background:
+        radial-gradient(circle at 30% 20%, rgba(212,175,106,0.15), transparent 40%),
+        radial-gradient(circle at 75% 80%, rgba(212,175,106,0.10), transparent 45%),
+        linear-gradient(160deg, #022C22, #064E3B 60%, #022C22);
+      transition: opacity 1.6s ease 0.9s, visibility 1.6s ease 0.9s;
+    }
+
+    #envelopeOverlay.open {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .seal-wrap {
+      text-align: center;
+      padding: 0 1.5rem;
+    }
+
+    .seal {
+      width: 128px;
+      height: 128px;
+      border-radius: 50%;
+      border: none;
+      cursor: pointer;
+      position: relative;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: Georgia, serif;
+      font-size: 2rem;
+      letter-spacing: 1px;
+      color: #4a3418;
+      background: radial-gradient(circle at 35% 28%, #e8c98a, #b08d57 62%, #7a5c30 100%);
+      box-shadow:
+        0 12px 28px rgba(0, 0, 0, 0.35),
+        inset 0 3px 5px rgba(255, 255, 255, 0.45),
+        inset 0 -8px 12px rgba(0, 0, 0, 0.35);
+      animation: sealPulse 2.6s ease-in-out infinite;
+      transition: transform 0.9s cubic-bezier(.22,1,.36,1), opacity 0.9s ease;
+    }
+
+    .seal::before,
+    .seal::after {
+      content: "";
+      position: absolute;
+      background: rgba(74, 52, 24, 0.55);
+      opacity: 0;
+      transition: opacity 0.5s ease 0.1s;
+    }
+
+    .seal::before {
+      width: 2px;
+      height: 68%;
+      top: 14%;
+      left: 44%;
+      transform: rotate(18deg);
+    }
+
+    .seal::after {
+      width: 2px;
+      height: 50%;
+      top: 22%;
+      left: 62%;
+      transform: rotate(-24deg);
+    }
+
+    .seal.cracked {
+      animation: none;
+      transform: scale(1.18) rotate(7deg);
+      opacity: 0;
+    }
+
+    .seal.cracked::before,
+    .seal.cracked::after {
+      opacity: 1;
+    }
+
+    @keyframes sealPulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.045); }
+    }
+
+    /* ================= SCRATCH CARDS ================= */
+
+    .scratch-wrap {
+      position: relative;
+      display: inline-block;
+      min-width: 220px;
+    }
+
+    .date-text {
+      white-space: nowrap;
+    }
+
+    .scratch-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      touch-action: none;
+    }
+
+    /* ================= MAIN CONTENT REVEAL ================= */
+
+    #mainContent {
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 1.2s ease, visibility 0s linear 1.2s;
+    }
+
+    #mainContent.revealed {
+      opacity: 1;
+      visibility: visible;
+      transition: opacity 1.2s ease;
+    }
+
+    /* ================= MUSIC TOGGLE ================= */
+
+    #musicToggle {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      z-index: 40;
+      width: 52px;
+      height: 52px;
+      border-radius: 9999px;
+      background: #064E3B;
+      color: #D4AF6A;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.35rem;
+      border: 1px solid rgba(212,175,106,0.45);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    #musicToggle:hover {
+      transform: scale(1.06);
+    }
+  </style>
+</head>
+
+<body class="text-emeraldDark font-sans locked" id="bodyEl">
+
+  <!-- ================= SEAL / ENVELOPE INTRO ================= -->
+  <div id="envelopeOverlay">
+    <div class="seal-wrap">
+      <p class="text-goldLight uppercase tracking-[0.35em] text-xs sm:text-sm mb-8">
+        You're Invited
+      </p>
+
+      <button id="sealButton" class="seal" aria-label="Tap to open the invitation">
+        R&S
+      </button>
+
+      <p class="text-white/70 text-sm mt-8 tracking-wide">
+        Tap the seal to open
+      </p>
+    </div>
+  </div>
+
+  <!-- ================= AUDIO ================= -->
+  <!--
+    NOTE: I can't include the actual "Sage" track by Ritviz here — it's copyrighted
+    and I'm not able to source or embed licensed audio files. Add your own legally
+    obtained copy of the mp3 (purchased/licensed, or a royalty-free alternative) at
+    the path below, or update the src to wherever you host it.
+  -->
+  <audio id="bgMusic" loop preload="none">
+    <source src="audio/sage-ritviz.mp3" type="audio/mpeg" />
+  </audio>
+
+  <button id="musicToggle" class="hidden" aria-label="Toggle background music">
+    🔊
+  </button>
+
+  <div id="mainContent">
+
+  <!-- ================= NAVBAR ================= -->
+  <header class="fixed top-0 left-0 right-0 z-50 bg-ivory/90 backdrop-blur-md border-b gold-border">
+    <nav class="max-w-6xl mx-auto px-5 py-4 flex items-center justify-between">
+
+      <a href="#home" class="font-serif text-xl text-emerald">
+        R & S
+      </a>
+
+      <div class="hidden md:flex gap-8 text-sm">
+        <a href="#home" class="hover:text-gold transition">Home</a>
+        <a href="#events" class="hover:text-gold transition">Events</a>
+        <a href="#rsvp" class="hover:text-gold transition">RSVP</a>
+      </div>
+
+      <a
+        href="#rsvp"
+        class="bg-emerald text-white px-5 py-2 rounded-full text-sm hover:bg-emeraldDark transition"
+      >
+        RSVP
+      </a>
+    </nav>
+  </header>
+
+
+  <!-- ================= HERO ================= -->
+  <section
+    id="home"
+    class="min-h-screen hero-pattern flex items-center justify-center pt-24 px-5"
+  >
+
+    <div class="max-w-6xl mx-auto w-full text-center">
+
+      <p class="uppercase tracking-[0.35em] text-gold text-sm mb-4">
+        Together with our families
+      </p>
+
+      <h1
+        class="font-serif text-5xl sm:text-6xl md:text-8xl gold-text mb-4"
+      >
+        Rudra & Samikshya
+      </h1>
+
+      <p class="text-emerald text-lg sm:text-xl mb-8">
+        We're Getting Married!
+      </p>
+
+      <!-- Caricature -->
+      <div class="flex justify-center mb-10">
+        <div class="relative">
+
+          <div
+            class="absolute inset-0 bg-gold/10 rounded-full blur-3xl"
+          ></div>
+
+          <!-- Replace this image with your generated couple caricature -->
+          <img
+            src="images/couple-caricature.png"
+            alt="Rudra and Samikshya wedding caricature"
+            class="relative w-72 sm:w-80 md:w-[420px] max-h-[560px] object-contain mx-auto"
+          />
+
+        </div>
+      </div>
+
+      <!-- Wedding Date -->
+      <p class="font-serif text-2xl text-emerald mb-6">
+        December 2, 2026
+      </p>
+
+      <!-- Countdown -->
+      <div
+        id="countdown"
+        class="grid grid-cols-4 gap-2 sm:gap-4 max-w-xl mx-auto"
+      >
+
+        <div class="countdown-box border gold-border rounded-2xl p-3 sm:p-5">
+          <div
+            id="days"
+            class="font-serif text-2xl sm:text-4xl text-gold"
+          >
+            00
+          </div>
+          <div class="text-xs uppercase tracking-wider mt-1">
+            Days
+          </div>
+        </div>
+
+        <div class="countdown-box border gold-border rounded-2xl p-3 sm:p-5">
+          <div
+            id="hours"
+            class="font-serif text-2xl sm:text-4xl text-gold"
+          >
+            00
+          </div>
+          <div class="text-xs uppercase tracking-wider mt-1">
+            Hours
+          </div>
+        </div>
+
+        <div class="countdown-box border gold-border rounded-2xl p-3 sm:p-5">
+          <div
+            id="minutes"
+            class="font-serif text-2xl sm:text-4xl text-gold"
+          >
+            00
+          </div>
+          <div class="text-xs uppercase tracking-wider mt-1">
+            Minutes
+          </div>
+        </div>
+
+        <div class="countdown-box border gold-border rounded-2xl p-3 sm:p-5">
+          <div
+            id="seconds"
+            class="font-serif text-2xl sm:text-4xl text-gold"
+          >
+            00
+          </div>
+          <div class="text-xs uppercase tracking-wider mt-1">
+            Seconds
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ================= EVENTS ================= -->
+  <section id="events" class="py-24 px-5 bg-white/40">
+
+    <div class="max-w-6xl mx-auto">
+
+      <div class="text-center mb-14">
+
+        <p class="uppercase tracking-[0.3em] text-gold text-sm mb-3">
+          Save the dates
+        </p>
+
+        <h2 class="font-serif text-4xl sm:text-5xl text-emerald">
+          Wedding Celebrations
+        </h2>
+
+        <div class="w-20 h-px bg-gold mx-auto mt-5"></div>
+
+        <p class="text-gray-500 text-sm mt-4">
+          Scratch the gold panel on each card to reveal the date ✦
+        </p>
+
+      </div>
+
+
+      <div class="grid md:grid-cols-2 gap-6">
+
+
+        <!-- Event 1 -->
+        <div
+          class="event-card bg-ivory border gold-border rounded-3xl p-7"
+        >
+
+          <div class="text-gold text-3xl mb-4">
+            ✦
+          </div>
+
+          <p class="text-sm uppercase tracking-widest text-gold">
+            01
+          </p>
+
+          <h3 class="font-serif text-2xl text-emerald mt-2">
+            Haldi Ceremony
+          </h3>
+
+          <div class="scratch-wrap mt-4">
+            <p class="text-gray-600 date-text">December 1, 2026 11:00:00</p>
+            <canvas class="scratch-canvas"></canvas>
+          </div>
+
+          <p class="mt-2 text-gray-500">
+            Family Residence, Cuttack
+          </p>
+
+          <a
+            href="https://maps.app.goo.gl/YmSM86hvaBVHZ54h9"
+            target="_blank"
+            rel="noopener"
+            class="inline-block mt-6 border border-emerald text-emerald px-5 py-2 rounded-full text-sm hover:bg-emerald hover:text-white transition"
+          >
+            Open in Google Maps
+          </a>
+
+        </div>
+
+
+        <!-- Event 2 -->
+        <div
+          class="event-card bg-ivory border gold-border rounded-3xl p-7"
+        >
+
+          <div class="text-gold text-3xl mb-4">
+            ✦
+          </div>
+
+          <p class="text-sm uppercase tracking-widest text-gold">
+            02
+          </p>
+
+          <h3 class="font-serif text-2xl text-emerald mt-2">
+            Mehendi Ceremony
+          </h3>
+
+          <div class="scratch-wrap mt-4">
+            <p class="text-gray-600 date-text">December 1, 2026 18:00:00</p>
+            <canvas class="scratch-canvas"></canvas>
+          </div>
+
+          <p class="mt-2 text-gray-500">
+            Family Residence, Cuttack
+          </p>
+
+          <a
+            href="https://maps.app.goo.gl/YmSM86hvaBVHZ54h9"
+            target="_blank"
+            rel="noopener"
+            class="inline-block mt-6 border border-emerald text-emerald px-5 py-2 rounded-full text-sm hover:bg-emerald hover:text-white transition"
+          >
+            Open in Google Maps
+          </a>
+
+        </div>
+
+
+        <!-- Event 3 -->
+        <div
+          class="event-card bg-ivory border gold-border rounded-3xl p-7"
+        >
+
+          <div class="text-gold text-3xl mb-4">
+            ✦
+          </div>
+
+          <p class="text-sm uppercase tracking-widest text-gold">
+            03
+          </p>
+
+          <h3 class="font-serif text-2xl text-emerald mt-2">
+            Wedding Ceremony
+          </h3>
+
+          <div class="scratch-wrap mt-4">
+            <p class="text-gray-600 date-text">December 2, 2026 19:30:00</p>
+            <canvas class="scratch-canvas"></canvas>
+          </div>
+
+          <p class="mt-2 text-gray-500">
+            Biju Pattnaik Kalyan Mandap, Athagarh
+          </p>
+
+          <a
+            href="https://maps.app.goo.gl/w3oHrrSgUEEY9zhbA"
+            target="_blank"
+            rel="noopener"
+            class="inline-block mt-6 border border-emerald text-emerald px-5 py-2 rounded-full text-sm hover:bg-emerald hover:text-white transition"
+          >
+            Open in Google Maps
+          </a>
+
+        </div>
+
+
+        <!-- Event 4 -->
+        <div
+          class="event-card bg-ivory border gold-border rounded-3xl p-7"
+        >
+
+          <div class="text-gold text-3xl mb-4">
+            ✦
+          </div>
+
+          <p class="text-sm uppercase tracking-widest text-gold">
+            04
+          </p>
+
+          <h3 class="font-serif text-2xl text-emerald mt-2">
+            Reception
+          </h3>
+
+          <div class="scratch-wrap mt-4">
+            <p class="text-gray-600 date-text">December 6, 2026 19:00:00</p>
+            <canvas class="scratch-canvas"></canvas>
+          </div>
+
+          <p class="mt-2 text-gray-500">
+            Barmala Convention, Cuttack
+          </p>
+
+          <a
+            href="https://maps.app.goo.gl/ZnfWqPf8aLdrKFYx8"
+            target="_blank"
+            rel="noopener"
+            class="inline-block mt-6 border border-emerald text-emerald px-5 py-2 rounded-full text-sm hover:bg-emerald hover:text-white transition"
+          >
+            Open in Google Maps
+          </a>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ================= RSVP ================= -->
+  <section id="rsvp" class="py-24 px-5">
+
+    <div class="max-w-2xl mx-auto">
+
+      <div class="text-center mb-12">
+
+        <p class="uppercase tracking-[0.3em] text-gold text-sm mb-3">
+          We would love to celebrate with you
+        </p>
+
+        <h2 class="font-serif text-4xl sm:text-5xl text-emerald">
+          RSVP
+        </h2>
+
+        <p class="text-gray-600 mt-4">
+          Please let us know if you'll be joining us.
+        </p>
+
+      </div>
+
+
+      <!-- Web3Forms -->
+      <form
+        id="rsvpForm"
+        action="https://api.web3forms.com/submit"
+        method="POST"
+        class="bg-white border gold-border rounded-3xl p-7 sm:p-10 shadow-sm"
+      >
+
+        <!-- Replace with your Web3Forms access key -->
+        <input
+          type="hidden"
+          name="access_key"
+          value="e907a229-19e0-4cc5-a3af-ae15fad6c72f"
+        />
+
+        <input
+          type="hidden"
+          name="subject"
+          value="Wedding RSVP - Rudra & Samikshya"
+        />
+
+        <input
+          type="hidden"
+          name="from_name"
+          value="Wedding Website"
+        />
+
+        <!-- Honeypot -->
+        <input
+          type="checkbox"
+          name="botcheck"
+          class="hidden"
+          style="display:none"
+        />
+
+
+        <!-- Name -->
+        <div class="mb-6">
+
+          <label
+            for="name"
+            class="block text-sm font-medium text-emerald mb-2"
+          >
+            Your Name
+          </label>
+
+          <input
+            type="text"
+            id="name"
+            name="name"
+            required
+            placeholder="Enter your name"
+            class="w-full px-4 py-3 rounded-xl border border-gray-200 bg-ivory focus:outline-none focus:ring-2 focus:ring-gold"
+          />
+
+        </div>
+
+
+        <!-- Attendance -->
+        <div class="mb-6">
+
+          <label
+            for="attendance"
+            class="block text-sm font-medium text-emerald mb-2"
+          >
+            Will you attend?
+          </label>
+
+          <select
+            id="attendance"
+            name="attendance"
+            required
+            class="w-full px-4 py-3 rounded-xl border border-gray-200 bg-ivory focus:outline-none focus:ring-2 focus:ring-gold"
+          >
+            <option value="">Please select</option>
+            <option value="Yes, I will attend">
+              Yes, I'll be there!
+            </option>
+            <option value="No, unable to attend">
+              Sorry, I can't attend
+            </option>
+          </select>
+
+        </div>
+
+
+        <!-- Guests -->
+        <div class="mb-8">
+
+          <label
+            for="guests"
+            class="block text-sm font-medium text-emerald mb-2"
+          >
+            Number of Guests
+          </label>
+
+          <select
+            id="guests"
+            name="number_of_guests"
+            required
+            class="w-full px-4 py-3 rounded-xl border border-gray-200 bg-ivory focus:outline-none focus:ring-2 focus:ring-gold"
+          >
+            <option value="">Select number</option>
+            <option value="1">1 Guest</option>
+            <option value="2">2 Guests</option>
+            <option value="3">3 Guests</option>
+            <option value="4">4 Guests</option>
+            <option value="5">5 Guests</option>
+          </select>
+
+        </div>
+
+
+        <!-- Submit -->
+        <button
+          type="submit"
+          id="submitButton"
+          class="w-full bg-emerald text-white py-3.5 rounded-full font-medium hover:bg-emeraldDark transition"
+        >
+          Send RSVP
+        </button>
+
+
+        <!-- Success Message -->
+        <div
+          id="successMessage"
+          class="hidden mt-6 text-center bg-green-50 text-emerald p-4 rounded-xl"
+        >
+          Thank you! Your RSVP has been received. ❤️
+        </div>
+
+
+        <!-- Error Message -->
+        <div
+          id="errorMessage"
+          class="hidden mt-6 text-center bg-red-50 text-red-700 p-4 rounded-xl"
+        >
+          Something went wrong. Please try again.
+        </div>
+
+      </form>
+
+    </div>
+  </section>
+
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="bg-emerald text-white py-12 text-center">
+
+    <p class="font-serif text-3xl text-goldLight">
+      Rudra & Samikshya
+    </p>
+
+    <p class="mt-3 text-white/70">
+      Two hearts. One beautiful journey.
+    </p>
+
+    <div class="w-16 h-px bg-goldLight/50 mx-auto my-6"></div>
+
+    <p class="text-sm text-white/50">
+      Made with ❤️ for our special day
+    </p>
+
+  </footer>
+
+  </div><!-- /#mainContent -->
+
+
+  <!-- ================= JAVASCRIPT ================= -->
+  <script>
+
+    /* ==========================================
+       SEAL / ENVELOPE OPEN INTRO
+       ========================================== */
+
+    const sealButton = document.getElementById("sealButton");
+    const envelopeOverlay = document.getElementById("envelopeOverlay");
+    const mainContent = document.getElementById("mainContent");
+    const bodyEl = document.getElementById("bodyEl");
+    const bgMusic = document.getElementById("bgMusic");
+    const musicToggle = document.getElementById("musicToggle");
+
+    let musicPlaying = false;
+
+    function openInvitation() {
+
+      sealButton.classList.add("cracked");
+      sealButton.disabled = true;
+
+      envelopeOverlay.classList.add("open");
+      mainContent.classList.add("revealed");
+      bodyEl.classList.remove("locked");
+
+      // Try to start background music now that we have a user gesture.
+      if (bgMusic) {
+        bgMusic.volume = 0.5;
+        bgMusic.play()
+          .then(() => {
+            musicPlaying = true;
+            musicToggle.textContent = "🔊";
+            musicToggle.classList.remove("hidden");
+          })
+          .catch(() => {
+            // Autoplay blocked, or no audio file has been added yet.
+            // Still show the toggle so the user can start it manually
+            // once they've added their own licensed audio file.
+            musicToggle.classList.remove("hidden");
+          });
+      }
+
+      setTimeout(() => {
+        envelopeOverlay.remove();
+      }, 2700);
+
+      // Give the browser a beat to finish layout before sizing the
+      // scratch canvases (they need real, visible dimensions).
+      setTimeout(initScratchCards, 900);
+    }
+
+    sealButton.addEventListener("click", openInvitation);
+
+    musicToggle.addEventListener("click", () => {
+      if (!bgMusic) return;
+
+      if (musicPlaying) {
+        bgMusic.pause();
+        musicPlaying = false;
+        musicToggle.textContent = "🔇";
+      } else {
+        bgMusic.play()
+          .then(() => {
+            musicPlaying = true;
+            musicToggle.textContent = "🔊";
+          })
+          .catch(() => {
+            alert("Add your licensed audio file at audio/sage-ritviz.mp3 (or update the <audio> source) to enable music.");
+          });
+      }
+    });
+
+
+    /* ==========================================
+       COUNTDOWN TIMER
+       Change this date/time to your wedding date.
+       ========================================== */
+
+    const weddingDate = new Date(
+      "December 2, 2026 19:30:00"
+    ).getTime();
+
+
+    function updateCountdown() {
+
+      const now = new Date().getTime();
+
+      const distance = weddingDate - now;
+
+
+      if (distance <= 0) {
+
+        document.getElementById("days").innerText = "00";
+        document.getElementById("hours").innerText = "00";
+        document.getElementById("minutes").innerText = "00";
+        document.getElementById("seconds").innerText = "00";
+
+        return;
+      }
+
+
+      const days = Math.floor(
+        distance / (1000 * 60 * 60 * 24)
+      );
+
+      const hours = Math.floor(
+        (distance % (1000 * 60 * 60 * 24)) /
+        (1000 * 60 * 60)
+      );
+
+      const minutes = Math.floor(
+        (distance % (1000 * 60 * 60)) /
+        (1000 * 60)
+      );
+
+      const seconds = Math.floor(
+        (distance % (1000 * 60)) /
+        1000
+      );
+
+
+      document.getElementById("days").innerText =
+        String(days).padStart(2, "0");
+
+      document.getElementById("hours").innerText =
+        String(hours).padStart(2, "0");
+
+      document.getElementById("minutes").innerText =
+        String(minutes).padStart(2, "0");
+
+      document.getElementById("seconds").innerText =
+        String(seconds).padStart(2, "0");
+    }
+
+
+    updateCountdown();
+
+    setInterval(updateCountdown, 1000);
+
+
+    /* ==========================================
+       SCRATCH-TO-REVEAL EVENT DATES
+       ========================================== */
+
+    let scratchCardsInitialized = false;
+
+    function initScratchCards() {
+
+      if (scratchCardsInitialized) return;
+      scratchCardsInitialized = true;
+
+      document.querySelectorAll(".scratch-wrap").forEach((wrap) => {
+
+        const canvas = wrap.querySelector(".scratch-canvas");
+        const ctx = canvas.getContext("2d");
+
+        const width = wrap.offsetWidth;
+        const height = wrap.offsetHeight;
+        const dpr = window.devicePixelRatio || 1;
+
+        canvas.width = width * dpr;
+        canvas.height = height * dpr;
+        canvas.style.width = width + "px";
+        canvas.style.height = height + "px";
+        ctx.scale(dpr, dpr);
+
+        function paintFoil() {
+          const grad = ctx.createLinearGradient(0, 0, width, height);
+          grad.addColorStop(0, "#e8c98a");
+          grad.addColorStop(0.5, "#b08d57");
+          grad.addColorStop(1, "#9a753d");
+          ctx.fillStyle = grad;
+          ctx.fillRect(0, 0, width, height);
+
+          ctx.fillStyle = "rgba(255,255,255,0.9)";
+          ctx.font = "600 12px Inter, Arial, sans-serif";
+          ctx.textAlign = "center";
+          ctx.textBaseline = "middle";
+          ctx.fillText("✦ scratch to reveal ✦", width / 2, height / 2);
+        }
+
+        paintFoil();
+
+        let isScratching = false;
+        let revealed = false;
+
+        function getPos(evt) {
+          const r = canvas.getBoundingClientRect();
+          const point = evt.touches ? evt.touches[0] : evt;
+          return {
+            x: point.clientX - r.left,
+            y: point.clientY - r.top
+          };
+        }
+
+        function scratchAt(x, y) {
+          ctx.globalCompositeOperation = "destination-out";
+          ctx.beginPath();
+          ctx.arc(x, y, 18, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        function revealPercent() {
+          const data = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+          let cleared = 0;
+          let sampled = 0;
+          for (let i = 3; i < data.length; i += 4 * 15) {
+            sampled++;
+            if (data[i] < 60) cleared++;
+          }
+          return sampled ? cleared / sampled : 0;
+        }
+
+        function maybeAutoClear() {
+          if (revealed) return;
+          if (revealPercent() > 0.45) {
+            revealed = true;
+            canvas.style.transition = "opacity 0.6s ease";
+            canvas.style.opacity = "0";
+            setTimeout(() => {
+              canvas.style.pointerEvents = "none";
+            }, 600);
+          }
+        }
+
+        function start(evt) {
+          isScratching = true;
+          const p = getPos(evt);
+          scratchAt(p.x, p.y);
+        }
+
+        function move(evt) {
+          if (!isScratching) return;
+          if (evt.cancelable) evt.preventDefault();
+          const p = getPos(evt);
+          scratchAt(p.x, p.y);
+          maybeAutoClear();
+        }
+
+        function end() {
+          isScratching = false;
+          maybeAutoClear();
+        }
+
+        canvas.addEventListener("pointerdown", start);
+        canvas.addEventListener("pointermove", move);
+        window.addEventListener("pointerup", end);
+
+        canvas.addEventListener("touchstart", start, { passive: true });
+        canvas.addEventListener("touchmove", move, { passive: false });
+        canvas.addEventListener("touchend", end);
+      });
+    }
+
+
+    /* ==========================================
+       RSVP FORM
+       ========================================== */
+
+    const form = document.getElementById("rsvpForm");
+
+    const submitButton =
+      document.getElementById("submitButton");
+
+    const successMessage =
+      document.getElementById("successMessage");
+
+    const errorMessage =
+      document.getElementById("errorMessage");
+
+
+    form.addEventListener("submit", async function (event) {
+
+      event.preventDefault();
+
+      submitButton.disabled = true;
+
+      submitButton.innerText = "Sending...";
+
+      successMessage.classList.add("hidden");
+
+      errorMessage.classList.add("hidden");
+
+
+      const formData = new FormData(form);
+
+
+      try {
+
+        const response = await fetch(
+          form.action,
+          {
+            method: "POST",
+            body: formData
+          }
+        );
+
+
+        const result = await response.json();
+
+
+        if (result.success) {
+
+          form.reset();
+
+          successMessage.classList.remove("hidden");
+
+        } else {
+
+          errorMessage.classList.remove("hidden");
+
+        }
+
+      } catch (error) {
+
+        errorMessage.classList.remove("hidden");
+
+      }
+
+
+      submitButton.disabled = false;
+
+      submitButton.innerText = "Send RSVP";
+
+    });
+
+  </script>
+
+</body>
+</html>
